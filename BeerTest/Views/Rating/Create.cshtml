@@ -1,0 +1,81 @@
+﻿@model BeerTest.Models.Rating
+
+@{
+    ViewBag.Title = "Create";
+    int userid = 0;
+}
+
+<h2>Rate a beer</h2>
+
+
+
+@using (Html.BeginForm()) 
+{
+    
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        @*<h4>Rating</h4>*@
+        <hr />
+        @Html.ValidationSummary(true)
+
+        @if (Request.Cookies["UserCookie"] != null && Request.Cookies["UserCookie"]["UserID"] != null)
+        {
+            userid = int.Parse(Request.Cookies["UserCookie"]["UserID"]);
+        }
+        else
+        {
+            Html.Action("Create", "User");
+        }
+            @Html.HiddenFor(model => model.UserID)
+
+        @*<div class="form-group">
+            @Html.LabelFor(model => model.UserID, "User", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                
+                
+                @@Html.DropDownList("UserID", String.Empty)@
+                @Html.ValidationMessageFor(model => model.UserID)
+            </div>
+        </div>*@
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.BeerID, "Beer", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("BeerID", string.Empty)
+                @Html.ValidationMessageFor(model => model.BeerID)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Score, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.Score, new SelectList( ViewBag.Scorelist,"Value","Text"))
+                @*@Html.EditorFor(model => model.Score, new { htmlAttributes = new { min = 1, max = 10} })*@
+                @Html.ValidationMessageFor(model => model.Score)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Comment, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Comment)
+                @Html.ValidationMessageFor(model => model.Comment)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

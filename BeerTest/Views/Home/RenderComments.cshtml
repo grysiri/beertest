@@ -1,0 +1,34 @@
+﻿@model IEnumerable<BeerTest.Models.Rating>
+
+<h1>@Model.First().Beer.Name</h1>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.User.Username)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Score)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Comment)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.User.Username)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Score)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Comment)
+        </td>
+
+    </tr>
+}
+
+</table>
