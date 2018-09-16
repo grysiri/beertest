@@ -10,7 +10,18 @@ namespace BeerTest.Controllers
 {
     public class HomeController : Controller
     {
-        private BeerContext db = new BeerContext();
+        private IBeerContext db;
+
+        public HomeController()
+        {
+            db = new BeerContext();
+        }
+
+        public HomeController(IBeerContext context)
+        {
+            db = context;
+        }
+
         public ActionResult Index()
         {
             var beers = db.Beers.OrderByDescending(b => b.Sorting).ToList();

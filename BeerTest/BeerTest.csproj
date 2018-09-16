@@ -166,6 +166,7 @@
     <Compile Include="Controllers\RatingController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="DAL\BeerContext.cs" />
+    <Compile Include="DAL\IBeerContext.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

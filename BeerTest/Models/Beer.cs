@@ -18,7 +18,7 @@ namespace BeerTest.Models
         public int Sorting { get; set; }
         public string FullName { get { return Brewery + " " + Name; } }
 
-        public virtual int? Score 
+        public virtual double? Score 
         { 
             get 
             {
@@ -28,8 +28,7 @@ namespace BeerTest.Models
                 foreach (var r in Ratings)
                     total += r.Score;
                 double score = (double)total / (double)Ratings.Count;
-                int rounded = Convert.ToInt32(score);
-                return rounded;//total / Ratings.Count;
+                return Math.Round(score, 2);
             } 
         }
         public ICollection<Rating> Ratings { get; set; }
